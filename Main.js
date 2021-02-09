@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
-
+import { List } from 'react-native-paper';
 
 const DATA = [
     {
@@ -19,11 +19,20 @@ const DATA = [
     },
 ];
 
-const Item = ({ title }) => (
-    <View style={styles.item}>
-        <Text style={styles.title}>{title}</Text>
-    </View>
-);
+class Item extends Component {
+    render() {
+        const { title, navigation } = this.props // pass in an id, get rest of data from redux store
+        debugger
+        return (
+            <List.Item
+                title={title}
+                description="get questions length"
+                left={props => <List.Icon {...props} icon="folder" />}
+                onPress={() => navigation.navigate('DeckView')}
+            />
+        )
+    }
+}
 
 class DeckView extends Component {
     render() {
@@ -39,11 +48,11 @@ class ListDecksView extends Component {
     render() {
 
         const renderItem = ({ item }) => (
-            <Item title={item.title} />
+            <Item title={item.title} navigation={this.props.navigation} />
         );
 
         return (
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={{ flex: 1 }}>
                 <FlatList
                     data={DATA}
                     renderItem={renderItem}
