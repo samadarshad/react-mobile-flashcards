@@ -4,14 +4,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
-
-
 class ListDecksView extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>ListDecksView</Text>
-                <StatusBar style="auto" />
+                <Text>ListDecksViewa</Text>
             </View>
         )
     }
@@ -22,7 +19,6 @@ class AddDeckView extends Component {
         return (
             <View style={styles.container}>
                 <Text>AddDeckView</Text>
-                <StatusBar style="auto" />
             </View>
         )
     }
@@ -75,7 +71,10 @@ const StackNav = () => (
 export default class Main extends Component {
     render() {
         return (
-            <BottomTabs />
+            <View style={{ flex: 1 }}>
+                <BottomTabs />
+                <StatusBar style="auto" />
+            </View>
         );
     }
 }
