@@ -1,12 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
+
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { createStore } from 'redux'
 import { Provider as PaperProvider } from 'react-native-paper';
 import { Provider as StoreProvider } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
 import middleware from './middleware'
 import reducer from './reducers'
-
+import Main from './Main'
 export default class App extends Component {
 
   render() {
@@ -15,21 +16,12 @@ export default class App extends Component {
     return (
       <StoreProvider store={store}>
         <PaperProvider>
-          <View style={styles.container}>
-            <Text>Open up App.js to start working on your app!</Text>
-            <StatusBar style="auto" />
-          </View>
+          <NavigationContainer>
+            <Main />
+          </NavigationContainer>
         </PaperProvider>
       </StoreProvider>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
