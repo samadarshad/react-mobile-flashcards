@@ -3,12 +3,14 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react
 import { Title, Subheading, Button } from 'react-native-paper';
 import { color } from 'react-native-reanimated';
 import { connect } from 'react-redux';
+import QuizResult from './QuizResult'
 
 class QuizView extends Component {
     state = {
         showingAnswer: false,
         questionIndex: 0,
         numCorrect: 0,
+        isEndOfQuiz: false,
     }
 
     onToggleAnswer = () => {
@@ -36,61 +38,68 @@ class QuizView extends Component {
         })
     }
 
-
+    componentDidUpdate() {
+        if ((this.state.questionIndex === this.props.questions.length) && !this.state.isEndOfQuiz) {
+            this.onEndOfQuiz()
+        }
+    }
+    onEndOfQuiz = () => {
+        this.setState({
+            isEndOfQuiz: true
+        })
+        // update store with score and save to asyncstorage
+    }
 
     render() {
-        const { showingAnswer, questionIndex } = this.state
-        const { id, questions, navigation } = this.props
-        const questionNumber = questionIndex + 1
-        const question = questions[questionIndex]?.question ?? null
-        const answer = questions[questionIndex]?.answer ?? null
-        const questionsLength = questions.length
-
-        if (!question) {
+        if (this.state.isEndOfQuiz) {
+            const { id, navigation } = this.props
             return (
-                <View>
-                    <Text>
-                        end of quiz
-                    </Text>
+                <QuizResult id={id} navigation={navigation} />
+            )
+        } else {
+            const { showingAnswer, questionIndex } = this.state
+            const { questions } = this.props
+            const questionNumber = questionIndex + 1
+            const question = questions[questionIndex]?.question
+            const answer = questions[questionIndex]?.answer
+            const questionsLength = questions.length
+
+            return (
+                <View style={{ flex: 1 }}>
+                    <Subheading style={{ margin: 10 }}>{questionNumber} / {questionsLength}</Subheading>
+                    <View style={styles.container}>
+                        {showingAnswer
+                            ?
+                            <>
+                                <Title>{answer}</Title>
+                                <Button mode="text" onPress={() => this.onToggleAnswer()} style={{ margin: 10 }}  >
+                                    <Text style={{ color: 'red' }}>
+                                        Question
+                                    </Text>
+
+                                </Button>
+                            </>
+                            :
+                            <>
+                                <Title>{question}</Title>
+                                <Button mode="text" onPress={() => this.onToggleAnswer()} style={{ margin: 10 }}  >
+                                    <Text style={{ color: 'red' }}>
+                                        Answer
+                                    </Text>
+
+                                </Button>
+                            </>
+                        }
+                        <Button icon="check" mode="contained" onPress={() => this.onCorrect()} style={{ margin: 10, backgroundColor: 'green' }}>
+                            I got it right
+                        </Button>
+                        <Button icon="close" mode="contained" onPress={() => this.onIncorrect()} style={{ margin: 10, backgroundColor: 'red' }}>
+                            Not this time
+                        </Button>
+                    </View>
                 </View>
             )
         }
-
-        return (
-            <View style={{ flex: 1 }}>
-                <Subheading style={{ margin: 10 }}>{questionNumber} / {questionsLength}</Subheading>
-                <View style={styles.container}>
-                    {showingAnswer
-                        ?
-                        <>
-                            <Title>{answer}</Title>
-                            <Button mode="text" onPress={() => this.onToggleAnswer()} style={{ margin: 10 }}  >
-                                <Text style={{ color: 'red' }}>
-                                    Question
-                    </Text>
-
-                            </Button>
-                        </>
-                        :
-                        <>
-                            <Title>{question}</Title>
-                            <Button mode="text" onPress={() => this.onToggleAnswer()} style={{ margin: 10 }}  >
-                                <Text style={{ color: 'red' }}>
-                                    Answer
-                    </Text>
-
-                            </Button>
-                        </>
-                    }
-                    <Button icon="check" mode="contained" onPress={() => this.onCorrect()} style={{ margin: 10, backgroundColor: 'green' }}>
-                        I got it right
-            </Button>
-                    <Button icon="close" mode="contained" onPress={() => this.onIncorrect()} style={{ margin: 10, backgroundColor: 'red' }}>
-                        Not this time
-            </Button>
-                </View>
-            </View>
-        )
     }
 }
 
