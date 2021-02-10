@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 class MainStack extends Component {
     render() {
         return (
-            <Stack.Navigator initialRouteName="ListDecksView">
+            <Stack.Navigator initialRouteName="DeckView">
                 <Stack.Screen
                     name="Home"
                     component={Home}

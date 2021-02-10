@@ -1,15 +1,31 @@
 import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
-
+import { Title, Subheading, Button } from 'react-native-paper';
 class DeckView extends Component {
     render() {
+        const { navigation } = this.props
+
         return (
             <View style={styles.container}>
-                <Text>this is a deck</Text>
+                <Title>get title</Title>
+                <Subheading>get num cards</Subheading>
+
+                <Button icon="card-plus" mode="outlined" onPress={() => navigation.navigate('AddQuestionView')} style={{ margin: 10 }}>
+                    Add Card
+            </Button>
+                <Button mode="contained" onPress={() => navigation.navigate('QuizView')} style={{ margin: 10 }}>
+                    Start Quiz
+            </Button>
+                <Button icon="folder-remove" mode="text" onPress={() => console.log('delete deck')} style={{ margin: 10 }}>
+                    Delete Deck
+            </Button>
+
             </View>
         )
     }
 }
+
+
 
 const styles = StyleSheet.create({
     container: {
