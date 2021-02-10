@@ -1,5 +1,6 @@
 const decks = {
-    React: {
+    0: {
+        id: "0",
         title: 'React',
         questions: [
             {
@@ -12,7 +13,8 @@ const decks = {
             }
         ]
     },
-    JavaScript: {
+    1: {
+        id: "1",
         title: 'JavaScript',
         questions: [
             {
