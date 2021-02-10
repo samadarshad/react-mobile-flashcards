@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import { Title, Subheading, Button } from 'react-native-paper';
 import { color } from 'react-native-reanimated';
-class QuizView extends Component {
+class AnswerView extends Component {
     render() {
         const { navigation } = this.props
         return (
             <View style={styles.container}>
-                <Title>get title</Title>
-                <Button mode="text" onPress={() => navigation.navigate('AnswerView')} style={{ margin: 10 }}  >
+                <Title>get answer</Title>
+                <Button mode="text" onPress={() => navigation.navigate('QuizView')} style={{ margin: 10 }}  >
                     <Text style={{ color: 'red' }}>
-                        Answer
+                        Question
                     </Text>
                 </Button>
                 <Button mode="contained" onPress={() => console.log('correct')} style={{ margin: 10, backgroundColor: 'green' }}>
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default QuizView
+export default AnswerView

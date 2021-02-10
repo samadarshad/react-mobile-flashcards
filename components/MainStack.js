@@ -4,13 +4,14 @@ import Home from './Home'
 import DeckView from './DeckView'
 import QuizView from './QuizView'
 import AddQuestionView from './AddQuestionView'
+import AnswerView from './AnswerView'
 
 const Stack = createStackNavigator();
 
 class MainStack extends Component {
     render() {
         return (
-            <Stack.Navigator initialRouteName="DeckView">
+            <Stack.Navigator initialRouteName="QuizView">
                 <Stack.Screen
                     name="Home"
                     component={Home}
@@ -25,6 +26,11 @@ class MainStack extends Component {
                     name="QuizView"
                     component={QuizView}
                     options={{ headerTitle: 'QuizView' }}
+                />
+                <Stack.Screen
+                    name="AnswerView"
+                    component={AnswerView}
+                    options={{ headerTitle: 'AnswerView' }}
                 />
                 <Stack.Screen
                     name="AddQuestionView"
