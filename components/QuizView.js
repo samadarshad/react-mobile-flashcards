@@ -8,6 +8,7 @@ class QuizView extends Component {
     state = {
         showingAnswer: false,
         questionIndex: 0,
+        numCorrect: 0,
     }
 
     onToggleAnswer = () => {
@@ -17,13 +18,43 @@ class QuizView extends Component {
             }
         })
     }
+
+    onCorrect = () => {
+        this.setState((prevState) => {
+            return {
+                numCorrect: prevState.numCorrect + 1,
+                questionIndex: prevState.questionIndex + 1,
+            }
+        })
+    }
+
+    onIncorrect = () => {
+        this.setState((prevState) => {
+            return {
+                questionIndex: prevState.questionIndex + 1,
+            }
+        })
+    }
+
+
+
     render() {
         const { showingAnswer, questionIndex } = this.state
         const { id, questions, navigation } = this.props
         const questionNumber = questionIndex + 1
-        const question = questions[questionIndex].question
-        const answer = questions[questionIndex].answer
+        const question = questions[questionIndex]?.question ?? null
+        const answer = questions[questionIndex]?.answer ?? null
         const questionsLength = questions.length
+
+        if (!question) {
+            return (
+                <View>
+                    <Text>
+                        end of quiz
+                    </Text>
+                </View>
+            )
+        }
 
         return (
             <View style={{ flex: 1 }}>
@@ -51,10 +82,10 @@ class QuizView extends Component {
                             </Button>
                         </>
                     }
-                    <Button icon="check" mode="contained" onPress={() => console.log('correct')} style={{ margin: 10, backgroundColor: 'green' }}>
+                    <Button icon="check" mode="contained" onPress={() => this.onCorrect()} style={{ margin: 10, backgroundColor: 'green' }}>
                         I got it right
             </Button>
-                    <Button icon="close" mode="contained" onPress={() => console.log('incorrect')} style={{ margin: 10, backgroundColor: 'red' }}>
+                    <Button icon="close" mode="contained" onPress={() => this.onIncorrect()} style={{ margin: 10, backgroundColor: 'red' }}>
                         Not this time
             </Button>
                 </View>
