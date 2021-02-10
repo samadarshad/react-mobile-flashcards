@@ -1,25 +1,25 @@
 const decks = {
     0: {
-        id: "0",
+        id: 0,
         title: 'React',
         questions: [
             {
-                question: 'React is library for managing user interfaces',
-                answer: 'true'
+                question: 'What is React?',
+                answer: 'A library for managing user interfaces'
             },
             {
-                question: 'Ajax requests in React happen in the componentDidMount lifecycle event',
-                answer: 'true'
+                question: 'Where do you make Ajax requests in React?',
+                answer: 'The componentDidMount lifecycle event'
             }
         ]
     },
     1: {
-        id: "1",
+        id: 1,
         title: 'JavaScript',
         questions: [
             {
-                question: 'A closure is the combination of a function and the lexical environment within which that function was declared',
-                answer: 'true'
+                question: 'What is a closure?',
+                answer: 'The combination of a function and the lexical environment within which that function was declared.'
             }
         ]
     }

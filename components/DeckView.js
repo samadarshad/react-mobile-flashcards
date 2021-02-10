@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import { Title, Subheading, Button } from 'react-native-paper';
+import { connect } from 'react-redux';
+
 class DeckView extends Component {
     render() {
-        const { navigation } = this.props
-        const { title } = this.props.route.params
+        const { id, title, questionsLength, navigation } = this.props
+
         return (
             <View style={styles.container}>
                 <Title>{title}</Title>
-                <Subheading>get num cards</Subheading>
+                <Subheading>{`${questionsLength} questions`}</Subheading>
 
                 <Button icon="card-plus" mode="outlined" onPress={() => navigation.navigate('AddQuestionView')} style={{ margin: 10 }}>
                     Add Card
             </Button>
-                <Button mode="contained" onPress={() => navigation.navigate('QuizView', { title: title, questionIndex: 0 })} style={{ margin: 10 }}>
+                <Button mode="contained" onPress={() => navigation.navigate('QuizView', { id: id, questionIndex: 0 })} style={{ margin: 10 }}>
                     Start Quiz
             </Button>
                 <Button icon="folder-remove" mode="text" onPress={() => console.log('delete deck')} style={{ margin: 10 }}>
@@ -45,4 +47,13 @@ const styles = StyleSheet.create({
 });
 
 
-export default DeckView
+function mapStateToProps({ decks }, { route }) {
+    const id = route.params.id
+    return {
+        id: id,
+        title: decks[id].title,
+        questionsLength: decks[id].questions.length
+    };
+};
+
+export default connect(mapStateToProps)(DeckView);

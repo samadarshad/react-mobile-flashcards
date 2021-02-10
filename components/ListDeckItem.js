@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 
 class ListDeckItem extends Component {
     render() {
-        const { title, questionsLength, navigation } = this.props // pass in an id, get rest of data from redux store
+        const { id, title, questionsLength, navigation } = this.props
         return (
-            <Card onPress={() => navigation.navigate('DeckView', { title: title })} style={{ margin: 5 }}>
+            <Card onPress={() => navigation.navigate('DeckView', { id: id })} style={{ margin: 5 }}>
                 <Card.Title title={title} subtitle={`${questionsLength} questions`} left={props => <List.Icon {...props} icon="folder" />} />
             </Card>
         )
@@ -16,6 +16,7 @@ class ListDeckItem extends Component {
 }
 function mapStateToProps({ decks }, { id }) {
     return {
+        id: id,
         title: decks[id].title,
         questionsLength: decks[id].questions.length
     };
