@@ -2,26 +2,37 @@ import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import { List, Card, Title, Paragraph } from 'react-native-paper';
 
-const DATA = [
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'First Item',
+
+const state_data = {
+    React: {
+        title: 'React',
+        questions: [
+            {
+                question: 'What is React?',
+                answer: 'A library for managing user interfaces'
+            },
+            {
+                question: 'Where do you make Ajax requests in React?',
+                answer: 'The componentDidMount lifecycle event'
+            }
+        ]
     },
-    {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: 'Second Item',
-    },
-    {
-        id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: 'Third Item',
-    },
-];
+    JavaScript: {
+        title: 'JavaScript',
+        questions: [
+            {
+                question: 'What is a closure?',
+                answer: 'The combination of a function and the lexical environment within which that function was declared.'
+            }
+        ]
+    }
+}
 
 class Item extends Component {
     render() {
         const { title, navigation } = this.props // pass in an id, get rest of data from redux store
         return (
-            <Card onPress={() => navigation.navigate('DeckView')} style={{ margin: 5 }}>
+            <Card onPress={() => navigation.navigate('DeckView', { title: title })} style={{ margin: 5 }}>
                 <Card.Title title={title} subtitle="get questions length" left={props => <List.Icon {...props} icon="folder" />} />
             </Card>
         )
@@ -38,9 +49,9 @@ class ListDecksView extends Component {
         return (
             <SafeAreaView style={{ flex: 1 }}>
                 <FlatList
-                    data={DATA}
+                    data={Object.values(state_data)}
                     renderItem={renderItem}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.title}
                 />
             </SafeAreaView>
         );

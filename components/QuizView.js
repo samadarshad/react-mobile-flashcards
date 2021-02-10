@@ -5,13 +5,14 @@ import { color } from 'react-native-reanimated';
 class QuizView extends Component {
     render() {
         const { navigation } = this.props
+        const { title, questionIndex } = this.props.route.params
         return (
             <View style={{ flex: 1 }}>
                 <Subheading style={{ margin: 10 }}>2 / 2</Subheading>
                 <View style={styles.container}>
 
 
-                    <Title>get title</Title>
+                    <Title>{title}{questionIndex}</Title>
                     <Button mode="text" onPress={() => navigation.navigate('AnswerView')} style={{ margin: 10 }}  >
                         <Text style={{ color: 'red' }}>
                             Answer
