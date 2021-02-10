@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 class MainStack extends Component {
     render() {
         return (
-            <Stack.Navigator initialRouteName="QuizView">
+            <Stack.Navigator initialRouteName="Home">
                 <Stack.Screen
                     name="Home"
                     component={Home}

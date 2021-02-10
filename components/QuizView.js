@@ -6,19 +6,24 @@ class QuizView extends Component {
     render() {
         const { navigation } = this.props
         return (
-            <View style={styles.container}>
-                <Title>get title</Title>
-                <Button mode="text" onPress={() => navigation.navigate('AnswerView')} style={{ margin: 10 }}  >
-                    <Text style={{ color: 'red' }}>
-                        Answer
+            <View style={{ flex: 1 }}>
+                <Subheading style={{ margin: 10 }}>2 / 2</Subheading>
+                <View style={styles.container}>
+
+
+                    <Title>get title</Title>
+                    <Button mode="text" onPress={() => navigation.navigate('AnswerView')} style={{ margin: 10 }}  >
+                        <Text style={{ color: 'red' }}>
+                            Answer
                     </Text>
-                </Button>
-                <Button mode="contained" onPress={() => console.log('correct')} style={{ margin: 10, backgroundColor: 'green' }}>
-                    Correct
+                    </Button>
+                    <Button mode="contained" onPress={() => console.log('correct')} style={{ margin: 10, backgroundColor: 'green' }}>
+                        Correct
             </Button>
-                <Button mode="contained" onPress={() => console.log('incorrect')} style={{ margin: 10, backgroundColor: 'red' }}>
-                    Incorrect
+                    <Button mode="contained" onPress={() => console.log('incorrect')} style={{ margin: 10, backgroundColor: 'red' }}>
+                        Incorrect
             </Button>
+                </View>
             </View>
         )
     }
@@ -27,7 +32,6 @@ class QuizView extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
