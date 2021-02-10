@@ -15,7 +15,7 @@ class DeckView extends Component {
                 <Button icon="card-plus" mode="outlined" onPress={() => navigation.navigate('AddQuestionView')} style={{ margin: 10 }}>
                     Add Card
             </Button>
-                <Button mode="contained" onPress={() => navigation.navigate('QuizView', { id: id, questionIndex: 0 })} style={{ margin: 10 }}>
+                <Button mode="contained" onPress={() => navigation.navigate('QuizView', { id: id })} style={{ margin: 10 }}>
                     Start Quiz
             </Button>
                 <Button icon="folder-remove" mode="text" onPress={() => console.log('delete deck')} style={{ margin: 10 }}>

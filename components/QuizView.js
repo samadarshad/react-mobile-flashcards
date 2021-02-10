@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 
 class QuizView extends Component {
     state = {
-        showingAnswer: false
+        showingAnswer: false,
+        questionIndex: 0,
     }
 
     onToggleAnswer = () => {
@@ -17,13 +18,18 @@ class QuizView extends Component {
         })
     }
     render() {
-        const { id, questionIndex, question, answer, questionsLength, navigation } = this.props
+        const { showingAnswer, questionIndex } = this.state
+        const { id, questions, navigation } = this.props
+        const questionNumber = questionIndex + 1
+        const question = questions[questionIndex].question
+        const answer = questions[questionIndex].answer
+        const questionsLength = questions.length
 
         return (
             <View style={{ flex: 1 }}>
-                <Subheading style={{ margin: 10 }}>{questionIndex} / {questionsLength}</Subheading>
+                <Subheading style={{ margin: 10 }}>{questionNumber} / {questionsLength}</Subheading>
                 <View style={styles.container}>
-                    {this.state.showingAnswer
+                    {showingAnswer
                         ?
                         <>
                             <Title>{answer}</Title>
@@ -76,13 +82,9 @@ const styles = StyleSheet.create({
 
 function mapStateToProps({ decks }, { route }) {
     const id = route.params.id
-    const questionIndex = route.params.questionIndex
     return {
         id: id,
-        questionIndex: questionIndex,
-        question: decks[id].questions[questionIndex].question,
-        answer: decks[id].questions[questionIndex].answer,
-        questionsLength: decks[id].questions.length
+        questions: decks[id].questions
     };
 };
 
