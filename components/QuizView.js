@@ -5,6 +5,17 @@ import { color } from 'react-native-reanimated';
 import { connect } from 'react-redux';
 
 class QuizView extends Component {
+    state = {
+        showingAnswer: false
+    }
+
+    onToggleAnswer = () => {
+        this.setState((prevState) => {
+            return {
+                showingAnswer: !prevState.showingAnswer
+            }
+        })
+    }
     render() {
         const { id, questionIndex, question, answer, questionsLength, navigation } = this.props
 
@@ -12,14 +23,28 @@ class QuizView extends Component {
             <View style={{ flex: 1 }}>
                 <Subheading style={{ margin: 10 }}>{questionIndex} / {questionsLength}</Subheading>
                 <View style={styles.container}>
-
-
-                    <Title>{question}</Title>
-                    <Button mode="text" onPress={() => console.log("show answer")} style={{ margin: 10 }}  >
-                        <Text style={{ color: 'red' }}>
-                            Answer
+                    {this.state.showingAnswer
+                        ?
+                        <>
+                            <Title>{answer}</Title>
+                            <Button mode="text" onPress={() => this.onToggleAnswer()} style={{ margin: 10 }}  >
+                                <Text style={{ color: 'red' }}>
+                                    Question
                     </Text>
-                    </Button>
+
+                            </Button>
+                        </>
+                        :
+                        <>
+                            <Title>{question}</Title>
+                            <Button mode="text" onPress={() => this.onToggleAnswer()} style={{ margin: 10 }}  >
+                                <Text style={{ color: 'red' }}>
+                                    Answer
+                    </Text>
+
+                            </Button>
+                        </>
+                    }
                     <Button icon="check" mode="contained" onPress={() => console.log('correct')} style={{ margin: 10, backgroundColor: 'green' }}>
                         I got it right
             </Button>
