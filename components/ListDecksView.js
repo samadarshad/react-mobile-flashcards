@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import { List, Card, Title, Paragraph } from 'react-native-paper';
-
+import { handleInitialData } from '../actions';
+import { connect } from 'react-redux';
 
 const state_data = {
     React: {
@@ -40,6 +41,10 @@ class Item extends Component {
 }
 
 class ListDecksView extends Component {
+    componentDidMount() {
+        const { dispatch } = this.props
+        dispatch(handleInitialData())
+    };
     render() {
 
         const renderItem = ({ item }) => (
@@ -58,4 +63,10 @@ class ListDecksView extends Component {
     }
 }
 
-export default ListDecksView
+function mapStateToProps({ decks }) {
+    return {
+        decks,
+    };
+};
+
+export default connect(mapStateToProps)(ListDecksView);
