@@ -7,7 +7,7 @@ import { Provider as StoreProvider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import middleware from './middleware'
 import reducer from './reducers'
-import Main from './Main'
+import Main from './components/Main'
 export default class App extends Component {
 
   render() {

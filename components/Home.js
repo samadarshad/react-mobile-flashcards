@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import { List, Card, Title, Paragraph } from 'react-native-paper';
+
 
 const DATA = [
     {
@@ -19,28 +19,13 @@ const DATA = [
     },
 ];
 
-
-
 class Item extends Component {
     render() {
         const { title, navigation } = this.props // pass in an id, get rest of data from redux store
-        //debugger
         return (
             <Card onPress={() => navigation.navigate('DeckView')} style={{ margin: 5 }}>
                 <Card.Title title={title} subtitle="get questions length" left={props => <List.Icon {...props} icon="folder" />} />
             </Card>
-
-
-        )
-    }
-}
-
-class DeckView extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                <Text>this is a deck</Text>
-            </View>
         )
     }
 }
@@ -77,58 +62,34 @@ class AddDeckView extends Component {
 
 const Tab = createMaterialBottomTabNavigator();
 
-export const Home = () => {
-    return (
-        <Tab.Navigator
-            initialRouteName="ListDecksView"
-            shifting={true}
-            sceneAnimationEnabled={false}
-        >
-            <Tab.Screen
-                name="ListDecksView"
-                component={ListDecksView}
-                options={{
-                    tabBarIcon: 'home-account',
-                }}
-            />
-            <Tab.Screen
-                name="AddDeckView"
-                component={AddDeckView}
-                options={{
-                    tabBarIcon: 'bell-outline',
-                }}
-            />
-        </Tab.Navigator>
-    );
-};
-
-const Stack = createStackNavigator();
-
-const StackNav = () => (
-    <Stack.Navigator initialRouteName="ListDecksView">
-        <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{ headerTitle: 'Home' }}
-        />
-        <Stack.Screen
-            name="DeckView"
-            component={DeckView}
-            options={{ headerTitle: 'DeckView' }}
-        />
-    </Stack.Navigator>
-)
-
-export default class Main extends Component {
+class Home extends Component {
     render() {
         return (
-            <View style={{ flex: 1 }}>
-                <StackNav />
-                <StatusBar style="auto" />
-            </View>
+            <Tab.Navigator
+                initialRouteName="ListDecksView"
+                shifting={true}
+                sceneAnimationEnabled={false}
+            >
+                <Tab.Screen
+                    name="ListDecksView"
+                    component={ListDecksView}
+                    options={{
+                        tabBarIcon: 'home-account',
+                    }}
+                />
+                <Tab.Screen
+                    name="AddDeckView"
+                    component={AddDeckView}
+                    options={{
+                        tabBarIcon: 'bell-outline',
+                    }}
+                />
+            </Tab.Navigator>
         );
     }
-}
+};
+
+export default Home
 
 const styles = StyleSheet.create({
     container: {
