@@ -22,7 +22,7 @@ function decks(state = {}, action) {
                 [action.id]: {
                     ...state[action.id],
                     questions: [
-                        ...state[action.id].questions,
+                        ...state[action.id].questions || [],
                         {
                             question: action.question,
                             answer: action.answer,
