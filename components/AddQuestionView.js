@@ -3,7 +3,7 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react
 import { List, Card, Title, Paragraph, Button, TextInput } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { Snackbar } from 'react-native-paper';
-import { addQuestion } from '../actions'
+import { handleAddQuestion } from '../actions'
 
 class AddQuestionView extends Component {
     state = {
@@ -13,8 +13,7 @@ class AddQuestionView extends Component {
     }
 
     onSubmit = () => {
-        console.log("adding qn", this.state.question, this.state.answer)
-        this.props.dispatch(addQuestion(this.props.id, this.state.question, this.state.answer))
+        this.props.dispatch(handleAddQuestion(this.props.id, this.state.question, this.state.answer))
         this.setState({
             question: '',
             answer: '',

@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const DECK_STORAGE_KEY = 'ReactMobileFlashcards:decks';
+const STATE_STORAGE_KEY = 'ReactMobileFlashcards:state';
 
-const dummyDecks = {
+const dummyState = {
     decks: {
         0: {
             id: 0,
@@ -40,33 +40,17 @@ export function generateUID() {
 }
 
 export function seedStorage() {
-    return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(dummyDecks));
+    return AsyncStorage.setItem(STATE_STORAGE_KEY, JSON.stringify(dummyState));
 }
 
 export function getDecks() {
-    return AsyncStorage.getItem(DECK_STORAGE_KEY)
+    return AsyncStorage.getItem(STATE_STORAGE_KEY)
         .then(JSON.parse)
         .then((results) => {
             return results.decks
         })
 };
 
-export function setStorage(decks) {
-    return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks));
-}
-
-export function getDeck(id) {
-    return decks[id]
-}
-
-export function saveDeckTitle(title) {
-    const id = generateUID()
-    console.log("saving", title, id)
-    return { id, title }
-}
-
-export function addCardToDeck(title, card) {
-    console.log("saving", JSON.stringify(card))
-    console.log("to", title)
-    return
+export function setStorage(state) {
+    return AsyncStorage.setItem(STATE_STORAGE_KEY, JSON.stringify(state));
 }

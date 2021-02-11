@@ -13,8 +13,12 @@ class AddDeckView extends Component {
         this.setState({
             title: ''
         })
-        this.props.dispatch(handleAddDeck(this.state.title))
-            .then((id) => this.props.navigation.navigate('DeckView', { id: id }))
+        // this.props.dispatch(handleAddDeck(this.state.title)) //TODO dispatch is a syncronous function, so no need to do .then(). you could just return the value directly?
+        //     .then((id) => this.props.navigation.navigate('DeckView', { id: id }))
+
+        const id = this.props.dispatch(handleAddDeck(this.state.title))
+        console.log("id", id)
+        this.props.navigation.navigate('DeckView', { id: id })
     }
     render() {
         return (

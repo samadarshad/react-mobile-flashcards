@@ -1,4 +1,4 @@
-import { getDecks, saveDeckTitle, setStorage, generateUID } from '../utils/api';
+import { getDecks, setStorage, generateUID } from '../utils/api';
 
 export const RECEIVE_DECKS = 'RECEIVE_DECKS';
 export const SAVE_SCORE = 'SAVE_SCORE';
@@ -26,11 +26,10 @@ export function handleAddDeck(title) {
         const deck = { id, title }
         dispatch(addDeck(deck))
         setStorage(getState()) // should use mergeItem instead if want to optimise for performance, I'm just doing the simple thing of re-writing the entire storage with my state
-        return Promise.resolve(deck.id)
+        // return Promise.resolve(deck.id)
+        return id
     }
 }
-
-
 
 export function addDeck(deck) {
     return {
@@ -51,6 +50,13 @@ export function addQuestion(id, question, answer) {
 export function handleAddQuestion(id, question, answer) {
     return (dispatch, getState) => {
         dispatch(addQuestion(id, question, answer))
+        setStorage(getState()) // should use mergeItem instead if want to optimise for performance, I'm just doing the simple thing of re-writing the entire storage with my state        
+    }
+}
+
+export function handleSaveScore(id, score, timestamp) {
+    return (dispatch, getState) => {
+        dispatch(saveScore(id, score, timestamp))
         setStorage(getState()) // should use mergeItem instead if want to optimise for performance, I'm just doing the simple thing of re-writing the entire storage with my state        
     }
 }
