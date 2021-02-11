@@ -27,7 +27,7 @@ class AddDeckView extends Component {
                     value={this.state.title}
                     onChangeText={title => this.setState({ title })}
                 />
-                <Button mode="contained" onPress={() => this.onSubmit()} style={{ margin: 10 }}>
+                <Button mode="contained" disabled={this.state.title === ''} onPress={() => this.onSubmit()} style={{ margin: 10 }}>
                     Submit
                 </Button>
             </View>
