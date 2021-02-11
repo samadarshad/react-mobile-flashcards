@@ -7,14 +7,17 @@ import { connect } from 'react-redux';
 class QuizResult extends Component {
 
     render() {
-        const { title, score, total, navigation } = this.props
+        const { onRestart, id, title, score, total, navigation } = this.props
         return (
             <View>
                 <Text>
                     {title}, {score}, {total}
                 </Text>
-                <Button mode="contained" icon='home' onPress={() => navigation.navigate('Home')} style={{ margin: 10 }}>
-                    Home
+                <Button mode="contained" icon='restart' onPress={() => onRestart()} style={{ margin: 10 }}>
+                    Restart Quiz
+                    </Button>
+                <Button mode="contained" icon='folder' onPress={() => navigation.navigate('DeckView')} style={{ margin: 10 }}>
+                    Back to Deck
                     </Button>
             </View>
         )
@@ -38,8 +41,9 @@ const styles = StyleSheet.create({
     },
 });
 
-function mapStateToProps({ decks }, { id, navigation }) {
+function mapStateToProps({ decks }, { onRestart, id, navigation }) {
     return {
+        onRestart,
         id,
         navigation,
         title: decks[id].title,

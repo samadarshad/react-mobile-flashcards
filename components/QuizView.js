@@ -13,6 +13,12 @@ class QuizView extends Component {
         isEndOfQuiz: false,
     }
 
+    componentDidMount() {
+        if (this.props.isRestart) {
+            this.onRestart()
+        }
+    }
+
     onToggleAnswer = () => {
         this.setState((prevState) => {
             return {
@@ -43,6 +49,13 @@ class QuizView extends Component {
             this.onEndOfQuiz()
         }
     }
+
+    onRestart = () => {
+        this.setState({
+            questionIndex: 0,
+            isEndOfQuiz: false
+        })
+    }
     onEndOfQuiz = () => {
         this.setState({
             isEndOfQuiz: true
@@ -54,7 +67,7 @@ class QuizView extends Component {
         if (this.state.isEndOfQuiz) {
             const { id, navigation } = this.props
             return (
-                <QuizResult id={id} navigation={navigation} />
+                <QuizResult onRestart={this.onRestart} id={id} navigation={navigation} />
             )
         } else {
             const { showingAnswer, questionIndex } = this.state
@@ -122,8 +135,10 @@ const styles = StyleSheet.create({
 
 function mapStateToProps({ decks }, { route }) {
     const id = route.params.id
+    const isRestart = route.params.isRestart ?? true
     return {
-        id: id,
+        id,
+        isRestart,
         questions: decks[id].questions
     };
 };
