@@ -1,4 +1,4 @@
-import { getDecks, saveDeckTitle } from '../utils/api';
+import { getDecks, saveDeckTitle, setStorage } from '../utils/api';
 
 export const RECEIVE_DECKS = 'RECEIVE_DECKS';
 export const SAVE_SCORE = 'SAVE_SCORE';
@@ -7,9 +7,9 @@ export const ADD_DECK = 'ADD_DECK';
 export const DELETE_DECK = 'DELETE_DECK';
 
 export function handleDeleteDeck(id) {
-    return (dispatch) => {
-        //delete deck from async
+    return (dispatch, getState) => {
         dispatch(deleteDeck(id))
+        setStorage(getState())
     }
 }
 
@@ -62,7 +62,10 @@ export function receiveDecks(decks) {
 
 export function handleInitialData() {
     return (dispatch) => {
-        const decks = getDecks()
-        dispatch(receiveDecks(decks));
+        return getDecks()
+            .then(({ decks }) => {
+                console.log("handleInitialData", decks)
+                dispatch(receiveDecks(decks));
+            })
     }
 }

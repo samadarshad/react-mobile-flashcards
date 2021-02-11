@@ -4,6 +4,7 @@ import { deleteProperty } from '../utils/helper'
 function decks(state = {}, action) {
     switch (action.type) {
         case RECEIVE_DECKS:
+            console.log(action.decks)
             return {
                 ...state,
                 ...action.decks
