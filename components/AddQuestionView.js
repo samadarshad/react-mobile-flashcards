@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import { List, Card, Title, Paragraph, Button, TextInput } from 'react-native-paper';
+import { connect } from 'react-redux';
+import { Snackbar } from 'react-native-paper';
 
 class AddQuestionView extends Component {
     state = {
         question: '',
         answer: '',
+        popupVisible: false,
+    }
+
+    onSubmit = () => {
+        console.log("adding qn", this.state.question, this.state.answer)
+        this.setState({
+            question: '',
+            answer: '',
+            popupVisible: true,
+        })
+
+        // have a toast popup to say the question has been saved
     }
     render() {
         return (
@@ -23,9 +37,15 @@ class AddQuestionView extends Component {
                     value={this.state.answer}
                     onChangeText={answer => this.setState({ answer })}
                 />
-                <Button mode="contained" onPress={() => console.log('submit new qn')} style={{ margin: 10 }}>
+                <Button mode="contained" onPress={() => this.onSubmit()} style={{ margin: 10 }} disabled={this.state.question === '' || this.state.answer === ''}>
                     Submit
                 </Button>
+                <Snackbar
+                    visible={this.state.popupVisible}
+                    duration={3000}
+                    onDismiss={() => this.setState({ popupVisible: false })}>
+                    Question saved to deck.
+                </Snackbar>
             </View>
         )
     }
@@ -48,4 +68,11 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AddQuestionView
+function mapStateToProps({ decks }, { route }) {
+    const id = route.params.id
+    return {
+        id,
+    };
+};
+
+export default connect(mapStateToProps)(AddQuestionView);

@@ -17,7 +17,7 @@ class DeckView extends Component {
                 <Title>{title}</Title>
                 <Subheading style={{ textAlign: 'center' }}>{`${questionsLength} questions${lastAttemptText}`}</Subheading>
 
-                <Button icon="card-plus" mode="outlined" onPress={() => navigation.navigate('AddQuestionView')} style={{ margin: 10 }}>
+                <Button icon="card-plus" mode="outlined" onPress={() => navigation.navigate('AddQuestionView', { id: id })} style={{ margin: 10 }}>
                     Add Card
             </Button>
                 <Button mode="contained" onPress={() => navigation.navigate('QuizView', { id: id })} style={{ margin: 10 }}>
