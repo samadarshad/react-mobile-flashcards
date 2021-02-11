@@ -11,7 +11,7 @@ class Home extends Component {
     render() {
         return (
             <Tab.Navigator
-                initialRouteName="ListDecksView"
+                initialRouteName="My Decks"
                 shifting={true}
                 sceneAnimationEnabled={false}
             >

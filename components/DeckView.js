@@ -9,12 +9,12 @@ import { handleDeleteDeck } from '../actions'
 class DeckView extends Component {
 
     onDelete = () => {
+        this.props.navigation.navigate('Home', { screen: "My Decks" })
         this.props.dispatch(handleDeleteDeck(this.props.id))
-        this.props.navigation.navigate('Home')
     }
 
     shouldComponentUpdate() {
-        return this.props.id !== null || this.props.id !== undefined
+        return this.props.exists
     }
     render() {
         const { id, title, lastAttemptedDate, lastScore, questionsLength, navigation } = this.props
@@ -64,7 +64,8 @@ function mapStateToProps({ decks }, { route }) {
     const id = route.params.id
     return {
         id: id,
-        title: decks[id].title,
+        exists: typeof decks[id] !== 'undefined',
+        title: decks[id]?.title,
         questionsLength: decks[id]?.questions?.length ?? 0,
         lastAttemptedDate: decks[id]?.lastAttemptedDate ?? null,
         lastScore: decks[id]?.lastScore ?? null,
