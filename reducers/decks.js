@@ -1,4 +1,5 @@
-import { RECEIVE_DECKS, SAVE_SCORE, ADD_QUESTION, ADD_DECK } from '../actions';
+import { RECEIVE_DECKS, SAVE_SCORE, ADD_QUESTION, ADD_DECK, DELETE_DECK } from '../actions';
+import { deleteProperty } from '../utils/helper'
 
 function decks(state = {}, action) {
     switch (action.type) {
@@ -38,6 +39,12 @@ function decks(state = {}, action) {
                     id: action.deck.id,
                     title: action.deck.title,
                 }
+            }
+        }
+        case DELETE_DECK: {
+            const newState = deleteProperty(state, action.id);
+            return {
+                ...newState
             }
         }
         default:

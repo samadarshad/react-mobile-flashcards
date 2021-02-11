@@ -4,8 +4,18 @@ import { Title, Subheading, Button } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 import { makeSubtitle } from '../utils/helper'
+import { handleDeleteDeck } from '../actions'
 
 class DeckView extends Component {
+
+    onDelete = () => {
+        this.props.dispatch(handleDeleteDeck(this.props.id))
+        this.props.navigation.navigate('Home')
+    }
+
+    shouldComponentUpdate() {
+        return this.props.id !== null || this.props.id !== undefined
+    }
     render() {
         const { id, title, lastAttemptedDate, lastScore, questionsLength, navigation } = this.props
         const subtitle = makeSubtitle(lastAttemptedDate, lastScore, questionsLength)
@@ -21,7 +31,7 @@ class DeckView extends Component {
                 <Button mode="contained" disabled={questionsLength === 0} onPress={() => navigation.navigate('QuizView', { id: id })} style={{ margin: 10 }}>
                     Start Quiz
             </Button>
-                <Button icon="folder-remove" mode="text" onPress={() => console.log('delete deck')} style={{ margin: 10 }}>
+                <Button icon="folder-remove" mode="text" onPress={() => this.onDelete()} style={{ margin: 10 }}>
                     Delete Deck
             </Button>
 

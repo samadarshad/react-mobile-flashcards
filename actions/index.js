@@ -4,6 +4,21 @@ export const RECEIVE_DECKS = 'RECEIVE_DECKS';
 export const SAVE_SCORE = 'SAVE_SCORE';
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const ADD_DECK = 'ADD_DECK';
+export const DELETE_DECK = 'DELETE_DECK';
+
+export function handleDeleteDeck(id) {
+    return (dispatch) => {
+        //delete deck from async
+        dispatch(deleteDeck(id))
+    }
+}
+
+export function deleteDeck(id) {
+    return {
+        type: DELETE_DECK,
+        id
+    }
+}
 
 export function handleAddDeck(title) {
     return (dispatch) => {
