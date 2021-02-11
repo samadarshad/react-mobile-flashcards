@@ -87,7 +87,7 @@ class QuizView extends Component {
                         {showingAnswer
                             ?
                             <>
-                                <Title>{answer}</Title>
+                                <Title style={{ textAlign: 'center' }}>{answer}</Title>
                                 <Button mode="text" onPress={() => this.onToggleAnswer()} style={{ margin: 10 }}  >
                                     <Text style={{ color: 'red' }}>
                                         Question

@@ -50,7 +50,7 @@ function mapStateToProps({ decks }, { onRestart, id, navigation }) {
         id,
         navigation,
         title: decks[id].title,
-        score: 1,
+        score: decks[id].lastScore,
         total: decks[id].questions.length,
     };
 };
