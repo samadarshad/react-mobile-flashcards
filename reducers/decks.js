@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS } from '../actions';
+import { RECEIVE_DECKS, SAVE_SCORE } from '../actions';
 
 function decks(state = {}, action) {
     switch (action.type) {
@@ -6,6 +6,15 @@ function decks(state = {}, action) {
             return {
                 ...state,
                 ...action.decks
+            }
+        case SAVE_SCORE:
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id],
+                    lastAttemptedDate: action.timestamp,
+                    lastScore: action.score,
+                }
             }
         default:
             return state

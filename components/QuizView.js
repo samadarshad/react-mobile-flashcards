@@ -4,6 +4,7 @@ import { Title, Subheading, Button } from 'react-native-paper';
 import { color } from 'react-native-reanimated';
 import { connect } from 'react-redux';
 import QuizResult from './QuizResult'
+import { saveScore } from '../actions'
 
 class QuizView extends Component {
     state = {
@@ -57,6 +58,8 @@ class QuizView extends Component {
         })
     }
     onEndOfQuiz = () => {
+        const timestamp = Date.now()
+        this.props.dispatch(saveScore(this.props.id, this.state.numCorrect, timestamp))
         this.setState({
             isEndOfQuiz: true
         })

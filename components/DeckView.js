@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import { Title, Subheading, Button } from 'react-native-paper';
 import { connect } from 'react-redux';
+import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 
 class DeckView extends Component {
     render() {
         const { id, title, lastAttemptedDate, lastScore, questionsLength, navigation } = this.props
         const lastAttemptText = (lastAttemptedDate !== '' && lastScore !== '')
-            ? `\nLast attempted ${lastAttemptedDate} with a score of ${lastScore}/${questionsLength}`
+            ? `\nLast attempted ${formatDistance(lastAttemptedDate, new Date())} ago with a score of ${lastScore}/${questionsLength}`
             : ``
 
 
