@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 
 class DeckView extends Component {
     render() {
-        const { id, title, questionsLength, navigation } = this.props
+        const { id, title, lastAttemptedDate, lastScore, questionsLength, navigation } = this.props
 
         return (
             <View style={styles.container}>
                 <Title>{title}</Title>
-                <Subheading>{`${questionsLength} questions`}</Subheading>
+                <Subheading style={{ textAlign: 'center' }}>{`${questionsLength} questions\nLast attempted ${lastAttemptedDate} with a score of ${lastScore}/${questionsLength}`}</Subheading>
 
                 <Button icon="card-plus" mode="outlined" onPress={() => navigation.navigate('AddQuestionView')} style={{ margin: 10 }}>
                     Add Card
@@ -52,7 +52,9 @@ function mapStateToProps({ decks }, { route }) {
     return {
         id: id,
         title: decks[id].title,
-        questionsLength: decks[id].questions.length
+        questionsLength: decks[id].questions.length,
+        lastAttemptedDate: "Today",
+        lastScore: 1,
     };
 };
 
