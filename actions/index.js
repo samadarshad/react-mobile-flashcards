@@ -26,7 +26,6 @@ export function handleAddDeck(title) {
         const deck = { id, title }
         dispatch(addDeck(deck))
         setStorage(getState()) // should use mergeItem instead if want to optimise for performance, I'm just doing the simple thing of re-writing the entire storage with my state
-        // return Promise.resolve(deck.id)
         return id
     }
 }
