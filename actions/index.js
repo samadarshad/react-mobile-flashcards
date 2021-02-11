@@ -8,7 +8,8 @@ export const ADD_DECK = 'ADD_DECK';
 export function handleAddDeck(title) {
     return (dispatch) => {
         const deck = saveDeckTitle(title)
-        return dispatch(addDeck(deck))
+        dispatch(addDeck(deck))
+        return Promise.resolve(deck.id)
     }
 }
 

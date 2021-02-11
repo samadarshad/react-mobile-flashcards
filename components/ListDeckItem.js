@@ -4,21 +4,12 @@ import { List, Card, Title, Paragraph } from 'react-native-paper';
 import { handleInitialData } from '../actions';
 import { connect } from 'react-redux';
 import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+import { makeSubtitle } from '../utils/helper'
 
 class ListDeckItem extends Component {
     render() {
         const { id, title, questionsLength, navigation, lastAttemptedDate, lastScore } = this.props
-        let subtitle, lastAttemptText
-        subtitle = `${questionsLength} questions`
-
-        if (lastAttemptedDate !== null) {
-            lastAttemptText = (lastAttemptedDate !== '' && lastScore !== '')
-                ? `\nLast attempted ${formatDistance(lastAttemptedDate, new Date())} ago with a score of ${lastScore}/${questionsLength}`
-                : ``
-
-            subtitle = `${subtitle}${lastAttemptText}`
-        }
-
+        const subtitle = makeSubtitle(lastAttemptedDate, lastScore, questionsLength)
 
         return (
             <Card onPress={() => navigation.navigate('DeckView', { id: id })} style={{ margin: 5 }}>

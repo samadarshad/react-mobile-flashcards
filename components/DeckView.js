@@ -3,19 +3,17 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react
 import { Title, Subheading, Button } from 'react-native-paper';
 import { connect } from 'react-redux';
 import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+import { makeSubtitle } from '../utils/helper'
 
 class DeckView extends Component {
     render() {
         const { id, title, lastAttemptedDate, lastScore, questionsLength, navigation } = this.props
-        const lastAttemptText = (lastAttemptedDate !== '' && lastScore !== '')
-            ? `\nLast attempted ${formatDistance(lastAttemptedDate, new Date())} ago with a score of ${lastScore}/${questionsLength}`
-            : ``
-
+        const subtitle = makeSubtitle(lastAttemptedDate, lastScore, questionsLength)
 
         return (
             <View style={styles.container}>
                 <Title>{title}</Title>
-                <Subheading style={{ textAlign: 'center' }}>{`${questionsLength} questions${lastAttemptText}`}</Subheading>
+                <Subheading style={{ textAlign: 'center' }}>{subtitle}</Subheading>
 
                 <Button icon="card-plus" mode="outlined" onPress={() => navigation.navigate('AddQuestionView', { id: id })} style={{ margin: 10 }}>
                     Add Card
@@ -57,9 +55,9 @@ function mapStateToProps({ decks }, { route }) {
     return {
         id: id,
         title: decks[id].title,
-        questionsLength: decks[id].questions.length,
-        lastAttemptedDate: decks[id].lastAttemptedDate,
-        lastScore: decks[id].lastScore,
+        questionsLength: decks[id]?.questions?.length ?? 0,
+        lastAttemptedDate: decks[id]?.lastAttemptedDate ?? null,
+        lastScore: decks[id]?.lastScore ?? null,
     };
 };
 
