@@ -9,7 +9,7 @@ class AddDeckView extends Component {
         title: ''
     }
 
-    onSubmit = async () => {
+    onSubmit = () => {
         console.log("adding deck", this.state.title)
         this.props.dispatch(handleAddDeck(this.state.title))
             .then((id) => console.log("new id is", id))
