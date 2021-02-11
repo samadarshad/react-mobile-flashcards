@@ -10,15 +10,11 @@ class AddDeckView extends Component {
     }
 
     onSubmit = () => {
-        console.log("adding deck", this.state.title)
-        this.props.dispatch(handleAddDeck(this.state.title))
-            .then((id) => console.log("new id is", id))
-
         this.setState({
             title: ''
         })
-        // get id
-        // navigate to new deck
+        this.props.dispatch(handleAddDeck(this.state.title))
+            .then((id) => this.props.navigation.navigate('DeckView', { id: id }))
     }
     render() {
         return (
