@@ -9,10 +9,13 @@ class QuizResult extends Component {
     render() {
         const { onRestart, id, title, score, total, navigation } = this.props
         return (
-            <View>
-                <Text>
-                    {title}, {score}, {total}
-                </Text>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Title>
+                    Your scored {score} out of {total}
+                </Title>
+                <Subheading>
+                    {title}
+                </Subheading>
                 <Button mode="contained" icon='restart' onPress={() => onRestart()} style={{ margin: 10 }}>
                     Restart Quiz
                     </Button>
