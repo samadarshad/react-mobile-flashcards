@@ -42,10 +42,13 @@ function generateUID() {
 export function seedStorage() {
     return AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(dummyDecks));
 }
+
 export function getDecks() {
     return AsyncStorage.getItem(DECK_STORAGE_KEY)
         .then(JSON.parse)
-        .then(({ decks }) => (decks))
+        .then((results) => {
+            return results.decks
+        })
 };
 
 export function setStorage(decks) {

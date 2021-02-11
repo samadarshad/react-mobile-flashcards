@@ -63,9 +63,9 @@ export function receiveDecks(decks) {
 export function handleInitialData() {
     return (dispatch) => {
         return getDecks()
-            .then(({ decks }) => {
-                console.log("handleInitialData", decks)
-                dispatch(receiveDecks(decks));
+            .then((results) => {
+                console.log("handleInitialData", results)
+                dispatch(receiveDecks(results));
             })
     }
 }
