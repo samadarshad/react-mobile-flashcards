@@ -21,9 +21,10 @@ export function deleteDeck(id) {
 }
 
 export function handleAddDeck(title) {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         const deck = saveDeckTitle(title)
         dispatch(addDeck(deck))
+        setStorage(getState())
         return Promise.resolve(deck.id)
     }
 }
@@ -64,7 +65,6 @@ export function handleInitialData() {
     return (dispatch) => {
         return getDecks()
             .then((results) => {
-                console.log("handleInitialData", results)
                 dispatch(receiveDecks(results));
             })
     }
