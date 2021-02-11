@@ -1,8 +1,23 @@
-import { getDecks } from '../utils/api';
+import { getDecks, saveDeckTitle } from '../utils/api';
 
 export const RECEIVE_DECKS = 'RECEIVE_DECKS';
 export const SAVE_SCORE = 'SAVE_SCORE';
 export const ADD_QUESTION = 'ADD_QUESTION';
+export const ADD_DECK = 'ADD_DECK';
+
+export function handleAddDeck(title) {
+    return (dispatch) => {
+        const deck = saveDeckTitle(title)
+        return dispatch(addDeck(deck))
+    }
+}
+
+export function addDeck(deck) {
+    return {
+        type: ADD_DECK,
+        deck
+    }
+}
 
 export function addQuestion(id, question, answer) {
     return {
@@ -13,6 +28,7 @@ export function addQuestion(id, question, answer) {
     }
 }
 export function saveScore(id, score, timestamp) {
+
     return {
         type: SAVE_SCORE,
         id,

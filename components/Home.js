@@ -16,17 +16,17 @@ class Home extends Component {
                 sceneAnimationEnabled={false}
             >
                 <Tab.Screen
-                    name="ListDecksView"
+                    name="My Decks"
                     component={ListDecksView}
                     options={{
-                        tabBarIcon: 'home-account',
+                        tabBarIcon: 'home',
                     }}
                 />
                 <Tab.Screen
-                    name="AddDeckView"
+                    name="Add New Deck"
                     component={AddDeckView}
                     options={{
-                        tabBarIcon: 'bell-outline',
+                        tabBarIcon: 'folder-plus',
                     }}
                 />
             </Tab.Navigator>

@@ -42,8 +42,9 @@ export function getDeck(id) {
 }
 
 export function saveDeckTitle(title) {
-    console.log("saving", title)
-    return
+    const id = generateUID()
+    console.log("saving", title, id)
+    return { id, title }
 }
 
 export function addCardToDeck(title, card) {

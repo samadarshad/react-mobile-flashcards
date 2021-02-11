@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS, SAVE_SCORE, ADD_QUESTION } from '../actions';
+import { RECEIVE_DECKS, SAVE_SCORE, ADD_QUESTION, ADD_DECK } from '../actions';
 
 function decks(state = {}, action) {
     switch (action.type) {
@@ -28,6 +28,15 @@ function decks(state = {}, action) {
                             answer: action.answer,
                         }
                     ]
+                }
+            }
+        }
+        case ADD_DECK: {
+            return {
+                ...state,
+                [action.deck.id]: {
+                    id: action.deck.id,
+                    title: action.deck.title,
                 }
             }
         }

@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
 import { List, Card, Title, Paragraph, Button, TextInput } from 'react-native-paper';
+import { handleAddDeck } from '../actions';
+import { connect } from 'react-redux';
 
 class AddDeckView extends Component {
     state = {
-        text: ''
+        title: ''
+    }
+
+    onSubmit = () => {
+        console.log("adding deck", this.state.title)
+        this.props.dispatch(handleAddDeck(this.state.title))
+        this.setState({
+            title: ''
+        })
+        // get id
+        // navigate to new deck
     }
     render() {
         return (
@@ -14,10 +26,10 @@ class AddDeckView extends Component {
                 <Title style={{ textAlign: 'center' }}>What is the title of your new deck?</Title>
                 <TextInput
                     label="Deck Title"
-                    value={this.state.text}
-                    onChangeText={text => this.setState({ text })}
+                    value={this.state.title}
+                    onChangeText={title => this.setState({ title })}
                 />
-                <Button mode="contained" onPress={() => console.log('submit new deck')} style={{ margin: 10 }}>
+                <Button mode="contained" onPress={() => this.onSubmit()} style={{ margin: 10 }}>
                     Submit
                 </Button>
             </View>
@@ -43,4 +55,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default AddDeckView
+export default connect()(AddDeckView);
