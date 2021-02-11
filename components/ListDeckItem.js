@@ -7,11 +7,14 @@ import { connect } from 'react-redux';
 class ListDeckItem extends Component {
     render() {
         const { id, title, questionsLength, navigation, lastAttemptedDate, lastScore } = this.props
+        const lastAttemptText = (lastAttemptedDate !== '' && lastScore !== '')
+            ? `, last attempted ${lastAttemptedDate} with a score of ${lastScore}/${questionsLength}`
+            : ``
+
         return (
             <Card onPress={() => navigation.navigate('DeckView', { id: id })} style={{ margin: 5 }}>
                 <Card.Title title={title} subtitle={
-                    `${questionsLength} questions
-                    Last attempted ${lastAttemptedDate} with a score of ${lastScore}/${questionsLength}`
+                    `${questionsLength} questions${lastAttemptText}`
                 } left={props => <List.Icon {...props} icon="folder" />} />
             </Card>
         )
@@ -22,8 +25,8 @@ function mapStateToProps({ decks }, { id }) {
         id: id,
         title: decks[id].title,
         questionsLength: decks[id].questions.length,
-        lastAttemptedDate: "Today",
-        lastScore: 1,
+        lastAttemptedDate: "today", //decks[id].lastAttemptedDate,
+        lastScore: 1,//decks[id].lastScore,
     };
 };
 

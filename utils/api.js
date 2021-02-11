@@ -11,7 +11,9 @@ const decks = {
                 question: 'Where do you make Ajax requests in React?',
                 answer: 'The componentDidMount lifecycle event'
             }
-        ]
+        ],
+        lastAttemptedDate: '',
+        lastScore: '',
     },
     1: {
         id: 1,
@@ -21,7 +23,9 @@ const decks = {
                 question: 'What is a closure?',
                 answer: 'The combination of a function and the lexical environment within which that function was declared.'
             }
-        ]
+        ],
+        lastAttemptedDate: '',
+        lastScore: '',
     }
 }
 
