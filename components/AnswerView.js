@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { Title, Subheading, Button } from 'react-native-paper';
-import { color } from 'react-native-reanimated';
 class AnswerView extends Component {
     render() {
         const { navigation } = this.props

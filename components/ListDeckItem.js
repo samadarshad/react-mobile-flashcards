@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
-import { List, Card, Title, Paragraph } from 'react-native-paper';
-import { handleInitialData } from '../actions';
+import { List, Card } from 'react-native-paper';
 import { connect } from 'react-redux';
-import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 import { makeSubtitle } from '../utils/helper'
 
 class ListDeckItem extends Component {

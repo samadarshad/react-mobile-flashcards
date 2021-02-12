@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Title, Subheading, Button } from 'react-native-paper';
-import { color } from 'react-native-reanimated';
 import { connect } from 'react-redux';
 import QuizResult from './QuizResult'
 import { handleSaveScore } from '../actions'
@@ -79,7 +78,7 @@ class QuizView extends Component {
                 <QuizResult onRestart={this.onRestart} id={id} navigation={navigation} />
             )
         } else {
-            const { showingAnswer, questionIndex } = this.state
+            const { questionIndex } = this.state
             const { questions } = this.props
             const questionNumber = questionIndex + 1
             const question = questions[questionIndex]?.question

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
-import { List, Card, Title, Paragraph } from 'react-native-paper';
+import { StyleSheet } from 'react-native';
 import ListDecksView from './ListDecksView'
 import AddDeckView from './AddDeckView'
 
@@ -36,20 +35,4 @@ class Home extends Component {
 
 export default Home
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    item: {
-        backgroundColor: '#f9c2ff',
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
-    },
-    title: {
-        fontSize: 32,
-    },
-});
+

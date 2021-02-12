@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
-import { List, Card, Title, Paragraph, Button } from 'react-native-paper';
+import { SafeAreaView, View, FlatList } from 'react-native';
+import { Title, Button } from 'react-native-paper';
 import { handleInitialData } from '../actions';
 import { connect } from 'react-redux';
 import ListDeckItem from './ListDeckItem'
-import { getDecks, seedStorage } from '../utils/api'
+import { seedStorage } from '../utils/api'
 
 class ListDecksView extends Component {
     componentDidMount() {

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Title, Subheading, Button } from 'react-native-paper';
 import { connect } from 'react-redux';
-import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 import { makeSubtitle } from '../utils/helper'
 import { handleDeleteDeck } from '../actions'
 
