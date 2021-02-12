@@ -3,7 +3,7 @@
 ## Overview
 A react native app for creating and recording flash cards.
 
-The project can be viewed here: https://youtu.be/okL74WFTTfg
+The project can be viewed here: https://youtu.be/XHI5Uz6tzdQ
 
 ## Prerequisite
 
