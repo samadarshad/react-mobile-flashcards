@@ -9,7 +9,7 @@ import { handleDeleteDeck } from '../actions'
 class DeckView extends Component {
 
     onDelete = () => {
-        this.props.navigation.navigate('Home', { screen: "My Decks" })
+        this.props.navigation.navigate('Home', { screen: 'My Decks' })
         this.props.dispatch(handleDeleteDeck(this.props.id))
     }
 

@@ -14,6 +14,7 @@ class AddDeckView extends Component {
             title: ''
         })
         const id = this.props.dispatch(handleAddDeck(this.state.title))
+        this.props.navigation.navigate('Home', { screen: 'My Decks' })
         this.props.navigation.navigate('DeckView', { id: id })
     }
     render() {

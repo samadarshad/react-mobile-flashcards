@@ -41,7 +41,7 @@ class ListDecksView extends Component {
                 <FlatList
                     data={this.props.decksArray}
                     renderItem={this._renderItem}
-                    keyExtractor={item => item?.id}
+                    keyExtractor={item => item.id.toString()}
                 />
             </SafeAreaView>
         )
