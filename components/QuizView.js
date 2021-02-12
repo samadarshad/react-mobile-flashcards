@@ -28,6 +28,7 @@ class QuizView extends Component {
                 showingAnswer: !prevState.showingAnswer
             }
         })
+
     }
 
     onCorrect = () => {
@@ -56,6 +57,7 @@ class QuizView extends Component {
     onRestart = () => {
         this.setState({
             questionIndex: 0,
+            numCorrect: 0,
             isEndOfQuiz: false
         })
     }
@@ -104,7 +106,7 @@ class QuizView extends Component {
                             </TouchableOpacity>
 
                         </CardFlip>
-                        <View style={{ flex: 0.25 }}>
+                        <View style={{ flex: 0.3 }}>
                             <Button icon="check" mode="contained" onPress={() => this.onCorrect()} style={{ margin: 10, backgroundColor: 'green' }}>
                                 I got it right
                         </Button>
@@ -140,7 +142,7 @@ const styles = StyleSheet.create({
         fontSize: 32,
     },
     cardContainer: {
-        flex: 1,
+        flex: 0.7,
         width: 320,
         height: 400,
         justifyContent: 'center',
