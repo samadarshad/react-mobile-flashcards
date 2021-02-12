@@ -13,7 +13,7 @@ class ListDeckItem extends Component {
 
         return (
             <Card onPress={() => navigation.navigate('DeckView', { id: id })} style={{ margin: 5 }}>
-                <Card.Title title={title} subtitle={subtitle} subtitleNumberOfLines={2}
+                <Card.Title title={title} subtitle={subtitle} subtitleNumberOfLines={3}
                     left={props => <List.Icon {...props} icon="folder" />} />
             </Card>
         )
