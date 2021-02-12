@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, TouchableOpacity } from 'react-native';
 import { Title, Subheading, Button } from 'react-native-paper';
 import { color } from 'react-native-reanimated';
 import { connect } from 'react-redux';
 import QuizResult from './QuizResult'
 import { handleSaveScore } from '../actions'
 import { moveNotificationToTomorrow } from '../utils/notifications'
+import CardFlip from 'react-native-card-flip';
 
 class QuizView extends Component {
     state = {
@@ -87,28 +88,24 @@ class QuizView extends Component {
                 <View style={{ flex: 1 }}>
                     <Subheading style={{ margin: 10 }}>{questionNumber} / {questionsLength}</Subheading>
                     <View style={styles.container}>
-                        {showingAnswer
-                            ?
-                            <>
-                                <Title style={{ textAlign: 'center' }}>{answer}</Title>
-                                <Button mode="text" onPress={() => this.onToggleAnswer()} style={{ margin: 10 }}  >
-                                    <Text style={{ color: 'red' }}>
-                                        Question
-                                    </Text>
 
-                                </Button>
-                            </>
-                            :
-                            <>
-                                <Title>{question}</Title>
-                                <Button mode="text" onPress={() => this.onToggleAnswer()} style={{ margin: 10 }}  >
-                                    <Text style={{ color: 'red' }}>
-                                        Answer
-                                    </Text>
+                        <CardFlip style={styles.cardContainer} ref={(card) => this.card = card} >
+                            <TouchableOpacity style={styles.card} onPress={() => this.card.flip()} >
+                                <Title style={{ textAlign: 'center' }}>{question}</Title>
+                                <Subheading style={{ textAlign: 'center', color: 'red' }}>
+                                    See Answer
+                                    </Subheading>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.card} onPress={() => this.card.flip()} >
+                                <Title style={{ textAlign: 'center', }}>{answer}</Title>
+                                <Subheading style={{ textAlign: 'center', color: 'red' }}>
+                                    See Question
+                                    </Subheading>
+                            </TouchableOpacity>
 
-                                </Button>
-                            </>
-                        }
+                        </CardFlip>
+
+
                         <Button icon="check" mode="contained" onPress={() => this.onCorrect()} style={{ margin: 10, backgroundColor: 'green' }}>
                             I got it right
                         </Button>
@@ -121,6 +118,8 @@ class QuizView extends Component {
         }
     }
 }
+
+
 
 const styles = StyleSheet.create({
     container: {
@@ -136,6 +135,26 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 32,
+    },
+    cardContainer: {
+        width: 320,
+        height: 470,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    card: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 320,
+        height: 470,
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        shadowColor: 'rgba(0,0,0,0.5)',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.5,
     },
 });
 
