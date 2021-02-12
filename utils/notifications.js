@@ -5,18 +5,17 @@ const localNotification = {
     body: 'Don`t forget to take a quiz today!',
 };
 
-function getTomorrowNotificationTime() {
-    let tomorrow = new Date();
-
+function getNotificationTime() {
     //below is the real notification timing
+    // let tomorrow = new Date();
     // tomorrow.setDate(tomorrow.getDate() + 1);
     // tomorrow.setHours(20);
     // tomorrow.setMinutes(0);
+    // return { date: tomorrow }
 
-    //below is for development purposes only
-    tomorrow.setDate(tomorrow.getDate());
-    tomorrow.setSeconds(59);
-    return tomorrow
+
+    //below is for development purposes only    
+    return { seconds: 10 }
 }
 
 async function allowsNotificationsAsync() {
@@ -55,9 +54,7 @@ export async function moveNotificationToTomorrow() {
 
         Notifications.scheduleNotificationAsync({
             content: localNotification,
-            trigger: {
-                date: getTomorrowNotificationTime(),
-            },
+            trigger: getNotificationTime(),
         });
         console.log('Notification scheduled.')
         Notifications.addNotificationReceivedListener(notification => {

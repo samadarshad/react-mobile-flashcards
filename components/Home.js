@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { StyleSheet } from 'react-native';
 import ListDecksView from './ListDecksView'
 import AddDeckView from './AddDeckView'
 

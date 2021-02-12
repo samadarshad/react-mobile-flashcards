@@ -9,7 +9,6 @@ import CardFlip from 'react-native-card-flip';
 
 class QuizView extends Component {
     state = {
-        showingAnswer: false,
         questionIndex: 0,
         numCorrect: 0,
         isEndOfQuiz: false,
@@ -19,15 +18,6 @@ class QuizView extends Component {
         if (this.props.isRestart) {
             this.onRestart()
         }
-    }
-
-    onToggleAnswer = () => {
-        this.setState((prevState) => {
-            return {
-                showingAnswer: !prevState.showingAnswer
-            }
-        })
-
     }
 
     onCorrect = () => {
@@ -113,9 +103,6 @@ class QuizView extends Component {
                                 Not this time
                         </Button>
                         </View>
-
-
-
                     </View>
                 </View>
             )
@@ -130,15 +117,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    item: {
-        backgroundColor: '#f9c2ff',
-        padding: 20,
-        marginVertical: 8,
-        marginHorizontal: 16,
-    },
-    title: {
-        fontSize: 32,
     },
     cardContainer: {
         flex: 0.7,
