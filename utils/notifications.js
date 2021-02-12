@@ -1,22 +1,29 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import * as Permissions from 'expo-permissions';
 import * as Notifications from 'expo-notifications';
 
-const NOTIFICATION_STORAGE_KEY = 'ReactMobileFlashcards:notifications';
-
-export function clearLocalNotification() {
-    return AsyncStorage.removeItem(NOTIFICATION_STORAGE_KEY)
-        .then(Notifications.cancelAllScheduledNotificationsAsync);
+const localNotification = {
+    title: "Mobile Flashcards",
+    body: 'Don`t forget to take a quiz today!',
 };
 
-export async function allowsNotificationsAsync() {
+function getTomorrowNotificationTime() {
+    let tomorrow = new Date();
+    // tomorrow.setDate(tomorrow.getDate() + 1);
+    // tomorrow.setHours(20);
+    // tomorrow.setMinutes(0);
+
+    tomorrow.setDate(tomorrow.getDate());
+    tomorrow.setSeconds(59);
+    return tomorrow
+}
+
+async function allowsNotificationsAsync() {
     const settings = await Notifications.getPermissionsAsync();
     return (
         settings.granted || settings.ios?.status === Notifications.IosAuthorizationStatus.PROVISIONAL
     );
 }
 
-export async function requestPermissionsAsync() {
+async function requestPermissionsAsync() {
     return await Notifications.requestPermissionsAsync({
         ios: {
             allowAlert: true,
@@ -26,73 +33,32 @@ export async function requestPermissionsAsync() {
         },
     });
 }
-
-function createNotification() {
-    return {
-        title: 'Study by Flashcards!',
-        body: "👋 do not forget to take a quiz today!",
-        ios: {
-            sound: true,
-        },
-        android: {
-            sound: true,
-            priority: 'high',
-            sticky: false,
-            vibrate: true,
-        }
-    };
-};
-
-function handleNotification() {
-    console.warn('ok! got your notif');
+export async function clearAllNotifications() {
+    Notifications.cancelAllScheduledNotificationsAsync()
 }
 
-export function testScheduleNotification() {
+export async function moveNotificationToTomorrow() {
+    clearAllNotifications()
+
     if (!allowsNotificationsAsync()) {
         console.log('Notification permissions needed.')
-        requestPermissionsAsync()
+        await requestPermissionsAsync()
+    }
+
+    if (!allowsNotificationsAsync()) { // is there a better way to handle requesting notification permissions then re-running this function?
+        console.log('Notification permissions denied.')
     } else {
         console.log('Notification permissions granted.')
+
+        Notifications.scheduleNotificationAsync({
+            content: localNotification,
+            trigger: {
+                date: getTomorrowNotificationTime(),
+            },
+        });
+        console.log('Notification scheduled.')
+        Notifications.addNotificationReceivedListener(notification => {
+            console.log("Notification received", notification);
+        });
     }
-    Notifications.scheduleNotificationAsync({
-        content: {
-            title: "Time's up!",
-            body: 'Change sides!',
-        },
-        trigger: {
-            seconds: 2,
-            repeats: true
-        },
-    });
-
-    Notifications.addNotificationReceivedListener(handleNotification);
-}
-
-export function setLocalNotification() {
-    AsyncStorage.getItem(NOTIFICATION_STORAGE_KEY)
-        .then(JSON.parse)
-        .then((data) => {
-            if (data === null) {
-                Permissions.askAsync(Permissions.NOTIFICATIONS)
-                    .then(({ status }) => {
-                        if (status === 'granted') {
-                            Notifications.cancelAllScheduledNotificationsAsync();
-                            let tomorrow = new Date();
-                            tomorrow.setDate(tomorrow.getDate() + 1);
-                            tomorrow.setHours(20);
-                            tomorrow.setMinutes(0);
-
-                            Notifications.scheduleLocalNotificationAsync(
-                                createNotification(),
-                                {
-                                    time: tomorrow,
-                                    repeat: 'day',
-                                }
-                            );
-
-                            AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
-                        }
-                    })
-            }
-        })
 }

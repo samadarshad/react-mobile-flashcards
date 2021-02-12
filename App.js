@@ -8,12 +8,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import middleware from './middleware'
 import reducer from './reducers'
 import Main from './components/Main'
-import { testScheduleNotification } from './utils/notifications'
+import { moveNotificationToTomorrow, clearAllNotifications } from './utils/notifications'
 
 export default class App extends Component {
 
   componentDidMount() {
-    testScheduleNotification()
+    // moveNotificationToTomorrow()
+    clearAllNotifications()
   }
 
   render() {

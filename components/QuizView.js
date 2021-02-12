@@ -5,6 +5,7 @@ import { color } from 'react-native-reanimated';
 import { connect } from 'react-redux';
 import QuizResult from './QuizResult'
 import { handleSaveScore } from '../actions'
+import { moveNotificationToTomorrow } from '../utils/notifications'
 
 class QuizView extends Component {
     state = {
@@ -63,6 +64,9 @@ class QuizView extends Component {
         this.setState({
             isEndOfQuiz: true
         })
+
+        // reset notification once a quiz has been completed
+        moveNotificationToTomorrow()
     }
 
     render() {
