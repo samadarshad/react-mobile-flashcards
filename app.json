@@ -20,13 +20,16 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.abdussamad.flashcards",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "useNextNotificationsApi": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "sdkVersion": "40.0.0"
   }
 }
