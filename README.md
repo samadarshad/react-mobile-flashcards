@@ -3,8 +3,7 @@
 ## Overview
 A react native app for creating and recording flash cards.
 
-The project can be viewed here:
-The APK is available here (drag and drop into your android device and the install):
+The project can be viewed here: https://youtu.be/okL74WFTTfg
 
 ## Prerequisite
 
@@ -26,3 +25,4 @@ Then hit `a` to run in android. Note: an android emulator must be started, or an
 - Styling should be percentage based where possible to allow for flex across different devices
 - Note: Notification is currently set to 1-minute for development purposes, it should be changed to next-day at 8pm for production
 - Quiz view card flip should be a controlled component, so that when going to the next question, the card is automatically reset to displaying the question, rather than remaining persistent to the answer
+- There should be a loading indicator when first loading the decks.
