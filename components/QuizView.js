@@ -104,14 +104,17 @@ class QuizView extends Component {
                             </TouchableOpacity>
 
                         </CardFlip>
+                        <View style={{ flex: 0.25 }}>
+                            <Button icon="check" mode="contained" onPress={() => this.onCorrect()} style={{ margin: 10, backgroundColor: 'green' }}>
+                                I got it right
+                        </Button>
+                            <Button icon="close" mode="contained" onPress={() => this.onIncorrect()} style={{ margin: 10, backgroundColor: 'red' }}>
+                                Not this time
+                        </Button>
+                        </View>
 
 
-                        <Button icon="check" mode="contained" onPress={() => this.onCorrect()} style={{ margin: 10, backgroundColor: 'green' }}>
-                            I got it right
-                        </Button>
-                        <Button icon="close" mode="contained" onPress={() => this.onIncorrect()} style={{ margin: 10, backgroundColor: 'red' }}>
-                            Not this time
-                        </Button>
+
                     </View>
                 </View>
             )
@@ -137,16 +140,16 @@ const styles = StyleSheet.create({
         fontSize: 32,
     },
     cardContainer: {
+        flex: 1,
         width: 320,
-        height: 470,
+        height: 400,
         justifyContent: 'center',
         alignItems: 'center'
     },
     card: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        width: 320,
-        height: 470,
         backgroundColor: '#fff',
         borderRadius: 5,
         shadowColor: 'rgba(0,0,0,0.5)',
