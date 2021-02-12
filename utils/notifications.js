@@ -7,10 +7,13 @@ const localNotification = {
 
 function getTomorrowNotificationTime() {
     let tomorrow = new Date();
+
+    //below is the real notification timing
     // tomorrow.setDate(tomorrow.getDate() + 1);
     // tomorrow.setHours(20);
     // tomorrow.setMinutes(0);
 
+    //below is for development purposes only
     tomorrow.setDate(tomorrow.getDate());
     tomorrow.setSeconds(59);
     return tomorrow
